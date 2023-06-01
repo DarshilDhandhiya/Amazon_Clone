@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="./customer_products.php">customer_products</a>
+<?php include 'customer_page.php'; ?>
 
 </body>
 </html>

@@ -72,6 +72,7 @@
                 <input type="submit" value="Add Product">
             </div>
         </form>
+
     </div>
 </body>
 </html>

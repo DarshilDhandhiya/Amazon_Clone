@@ -34,9 +34,9 @@
   <!-- Navbar -->
   <div class="navbar">
         <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="./manage_products.php">Manage Products</a></li>
-            <li><a href="./admin_add_product.php">Add Product</a></li>
+            <li><a href="./Admin_Dashboard">Dashboard</a></li>
+            <li><a href="./admin_add_product.php">Manage Products</a></li>
+            <li><a href="./Admin_Add_Products.php">Add Product</a></li>
             <li><a href="./edit_product.php">Edit Product</a></li>
             <li><a href="./delete_product.php">Delete Product</a></li>
             <li><a href="#">View Orders</a></li>
