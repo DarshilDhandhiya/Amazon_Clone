@@ -94,8 +94,6 @@
         </form>
     </div>
 
-    
-
     <script>
         var subMenuOptions = {
             mobile: ["Apple", "OnePlus", "Pixel", "Realme", "Samsung", "Sony"],
