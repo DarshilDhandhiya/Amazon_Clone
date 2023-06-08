@@ -1,57 +1,38 @@
 <?php
-session_start(); // Start the session (if not already started)
+// Start the session (if not already started)
+session_start();
 
-// Check if the product ID is provided
-if (isset($_GET['product_id'])) {
-    $product_id = $_GET['product_id'];
-
-    // Check if the product exists in your database and retrieve its details
-    // Here, you would typically query your products table based on the provided $product_id
-    // and store the product details in the $product variable
-    // Example query: SELECT * FROM products WHERE id = $product_id
-    // $product = <result of the query>
-
-    // If the product is found
-    if ($product) {
-        // Check if the cart already exists in the session, or create a new one
-        if (isset($_SESSION['cart'])) {
-            $cart = $_SESSION['cart'];
-        } else {
-            $cart = array();
-        }
-
-        // Check if the product is already in the cart
-        $found = false;
-        foreach ($cart as &$cart_item) {
-            if ($cart_item['product_id'] == $product_id) {
-                // Increase the quantity if the product is already in the cart
-                $cart_item['quantity']++;
-                $found = true;
-                break;
-            }
-        }
-
-        // If the product is not already in the cart, add it as a new item
-        if (!$found) {
-            $cart_item = array(
-                'product_id' => $product_id,
-                'quantity' => 1
-            );
-            $cart[] = $cart_item;
-        }
-
-        // Update the cart in the session
-        $_SESSION['cart'] = $cart;
-
-        // Redirect the user to the cart page or any other appropriate page
-        header('Location: View_Cart.php');
-        exit();
-    } else {
-        // Product not found, handle error or redirect to an appropriate page
-        echo "Product not found.";
+// Check if the product ID is provided in the request
+if(isset($_GET['product_id'])) {
+    $productId = $_GET['product_id'];
+    
+    // Connect to the database
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "ecom";
+    
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-} else {
-    // Product ID not provided, handle error or redirect to an appropriate page
-    echo "Invalid product ID.";
+    
+    // Fetch the product details from the database
+    $sql = "SELECT * FROM products WHERE product_id = $productId";
+    $result = $conn->query($sql);
+    
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        // Add the product to the cart session variable
+        $_SESSION['cart'][] = $row;
+        
+        // Redirect to the cart page
+        header("Location: cart.php");
+        exit();
+    }
+    
+    $conn->close();
 }
-?>

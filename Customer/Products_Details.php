@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
         $product_company = $row['product_company'];
         $product_details = $row['product_details'];
 
-        // Fetch product images
+        // Fetch product images$result = $db->query("SELECT image FROM images ORDER BY id DESC"); 
         $image_sql = "SELECT image_path FROM product_images WHERE product_id = $product_id";
         $image_result = $conn->query($image_sql);
         $product_images = [];
@@ -42,6 +42,18 @@ if (isset($_GET['id'])) {
 } else {
     echo "Invalid product ID.";
 }
+?>
+
+<?php if($result->num_rows > 0){ ?> 
+    <div class="gallery"> 
+        <?php while($row = $result->fetch_assoc()){ ?> 
+            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" /> 
+        <?php } ?> 
+    </div> 
+<?php }else{ ?> 
+    <p class="status error">Image(s) not found...</p> 
+<?php }
+        
 
 // Add product to cart
 if (isset($_POST['add_to_cart'])) {
@@ -59,7 +71,7 @@ if (isset($_POST['add_to_cart'])) {
     // Add item to cart session variable
     $_SESSION['cart'][] = $item;
 
-    header("Location: View_Cart.php");
+    header("Location: cart.php");
     exit;
 }
 

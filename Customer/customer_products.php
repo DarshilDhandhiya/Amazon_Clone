@@ -67,7 +67,6 @@
             $product_price = $row['product_price'];
             $product_category = $row['product_category'];
             $product_company = $row['product_company'];
-            $product_details = $row['product_details'];
 
             // Fetch product images
             $image_sql = "SELECT image_path FROM product_images WHERE product_id = $product_id";
@@ -82,10 +81,9 @@
             <div class="product">
                 
                 <h3><?php echo $product_name; ?></h3>
-                <p><strong>Price:</strong> $<?php echo $product_price; ?></p>
+                <p><strong>Price:</strong> &#8377; <?php echo $product_price; ?></p>
                 <p><strong>Category:</strong> <?php echo $product_category; ?></p>
                 <p><strong>Company:</strong> <?php echo $product_company; ?></p>
-                <p><strong>Details:</strong> <?php echo $product_details; ?></p>
 
                 <div class="product-photos">
                     <?php foreach ($product_images as $image_path) { ?>
