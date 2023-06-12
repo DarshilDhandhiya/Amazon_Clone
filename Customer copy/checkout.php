@@ -130,7 +130,7 @@ if (isset($_POST['submit'])) {
             </table>
         </div>
 
-        <form action="Payment.php" method="post">
+        <form action="checkout-process.php" method="post">
     <input type="submit" name="submit" class="checkout-button" value="Place Order">
 </form>
 

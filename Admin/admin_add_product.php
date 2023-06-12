@@ -62,6 +62,7 @@
 <body>
     <div class="form-container">
         <h2>Add Product</h2>
+        
         <form action="process_add_product.php" method="post" enctype="multipart/form-data">
             <label for="product_name">Product Name:</label>
             <input type="text" name="product_name" id="product_name" required><br><br>
@@ -71,7 +72,7 @@
 
             <label for="product_category">Product Category:</label>
             <select name="product_category" id="product_category" required>
-                <option value="">-- Category --</option>
+                <option value="">-- Select Category --</option>
                 <option value="mobile">Mobile</option>
                 <option value="watch">Watch</option>
                 <option value="speaker">Speaker</option>
@@ -81,24 +82,64 @@
 
             <label for="product_company">Product Company:</label>
             <select name="product_company" id="product_company">
-                <option value="">-- Select --</option>
+                <option value="">-- Select Company --</option>
+                <option value="Apple">Apple</option>
+                <option value="OnePlus">OnePlus</option>
+                <option value="Pixel">Pixel</option>
+                <option value="Fastrack">Fastrack</option>
+                <option value="Fossil">Fossil</option>
+                <option value="Noise">Noise</option>
+                <option value="Boat">Boat</option>
+                <option value="Bose">Bose</option>
+                <option value="JBL">JBL</option>
+                <option value="LG">LG</option>
+                <option value="Vu">Vu</option>
+                <option value="Canon">Canon</option>
+                <option value="Casio">Casio</option>
+                <option value="Nikon">Nikon</option>
             </select><br><br>
 
             <label for="product_details">Product Details:</label>
             <textarea name="product_details" id="product_details" rows="10" cols="50" required></textarea><br><br>
 
-            <label for="product_image">Product Image:</label>
-            <input type="file" name="product_image[]" id="product_image" multiple required><br><br>
+            <!-- <label for="product_image">Product Image:</label>
+            <input type="file" name="product_image[]" id="product_image" multiple required><br> -->
 
-            <input type="submit" value="Add Product">
+            <label>Select Product Image:</label>
+            <input type="file" id="product_image" name="image" required><br><br>
+
+            <input type="submit" name="submit" value="Add Product">
         </form>
     </div>
 
     
-
+    <!-- to create option menu in order -->
     <script>
+  // Get the select element
+//   var select = document.getElementById("product_company");
+
+  // Get the options
+  var options = Array.from(select.options);
+
+  // Sort the options alphabetically
+  options.sort(function(a, b) {
+    if (a.text < b.text) return -1;
+    if (a.text > b.text) return 1;
+    return 0;
+  });
+
+  // Clear the select element
+  select.innerHTML = "";
+
+  // Add the sorted options back to the select element
+  options.forEach(function(option) {
+    select.add(option);
+  });
+</script>
+
+    <!-- <script>
         var subMenuOptions = {
-            mobile: ["Apple", "OnePlus", "Pixel", "Realme", "Samsung", "Sony"],
+            mobile: ["Apple", "OnePlus", "Pixel"],
             watch: ["Fastrack", "Fossil", "Noise"],
             speaker: ["Boat", "Bose", "JBL"],
             tv: ["LG", "Panasonic", "Vu"],
@@ -123,6 +164,30 @@
                 }
             }
         });
-    </script>
+    </script> -->
 </body>
 </html>
+
+
+<b></b><br>
+<b></b><br>
+<b></b><br>
+<b></b><br>
+<b></b><br>
+
+<li></li><br><br>
+<li></li><br><br>
+<li></li><br><br>
+<li></li><br><br>
+<li></li><br><br>
+<li></li><br><br>
+<li></li><br><br>
+<li></li><br><br>
+
+
+
+<b>Brand: </b><br><br>
+<b>Model Name: </b><br><br>
+<b>Network Service Provider</b><br><br>
+<b>Operating System: </b><br><br>
+<b>Cellular Technology: </b><br>

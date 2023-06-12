@@ -39,8 +39,8 @@
             <li><a href="./Admin_Add_Products.php">Add Product</a></li>
             <li><a href="./edit_product.php">Edit Product</a></li>
             <li><a href="./delete_product.php">Delete Product</a></li>
-            <li><a href="#">View Orders</a></li>
-            <li><a href="#">Manage Orders</a></li>
+            <li><a href="admin-orders.php">View Orders</a></li>
+            <li><a href="admin-orders.php">Manage Orders</a></li>
             <li><a href="./A_Logout.php">Logout</a></li>
         </ul>
     </div>
@@ -61,8 +61,8 @@
         
         <h3>Manage Orders</h3>
         <ul>
-            <li><a href="#">View Orders</a></li>
-            <li><a href="#">Manage Orders</a></li>
+            <li><a href="admin-orders.php">View Orders</a></li>
+            <li><a href="admin-orders.php">Manage Orders</a></li>
         </ul>
 
         <h3>Logout</h3>
