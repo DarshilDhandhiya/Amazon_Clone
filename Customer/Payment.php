@@ -1,3 +1,6 @@
+<?php
+    require './razorpay-php-master/Razorpay.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,7 +120,7 @@
                         window.location.href = 'checkout-process.php';
                         break;
                     case 'razorpay':
-                        window.location.href = 'checkout-process.php';
+                        window.location.href = './razorpay-php-master/Razorpay.php';
                         break;
                     case 'UPI':
                         window.location.href = 'checkout-process.php';
