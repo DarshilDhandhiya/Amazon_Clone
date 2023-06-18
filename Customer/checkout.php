@@ -1,5 +1,10 @@
 <?php
-// Start the session (if not already started)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+require './Razorpay/Razorpay.php';
+use Razorpay\Api\Api;
+
 session_start();
 
 // Check if the cart is empty
@@ -8,133 +13,53 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     exit();
 }
 
-// Calculate the total price
-$totalPrice = 0;
-foreach ($_SESSION['cart'] as $product) {
-    $totalPrice += $product['product_price'] * $product['quantity'];
-}
+// Get the total price from the form data
+$totalPrice = $_POST['total_price'];
 
-// Process the checkout
-if (isset($_POST['submit'])) {
-    // Perform any necessary processing, such as saving order details to the database
+// Initialize the Razorpay API
+$api = new Api('rzp_test_1GaCiVC0yUp5a2', 'Wd0bCMuVME0A1PnRW1r6ubMW');
 
-    // Clear the cart after successful checkout
-    $_SESSION['cart'] = array();
+// Create an order
+$orderData = [
+    'receipt' => uniqid(),
+    'amount' => $totalPrice * 100, // Amount in paise (multiply by 100 for INR)
+    'currency' => 'INR',
+    'payment_capture' => 1 // Auto-capture payment
+];
 
-    // Redirect to a success page
-    header("Location: checkout-success.php");
-    exit();
-}
+$order = $api->order->create($orderData);
 
-// Display the checkout page
+// Store the order ID in the session
+$_SESSION['order_id'] = $order->id;
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+// Display the payment form
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Checkout</title>
-    <style>
-        .header {
-            background: #131921;
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .amazon-logo img {
-            height: 40px;
-        }
-
-        .checkout-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .checkout-container h1 {
-            margin-top: 0;
-        }
-
-        .order-summary {
-            margin-bottom: 20px;
-        }
-
-        .order-summary table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .order-summary th,
-        .order-summary td {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            text-align: left;
-        }
-
-        .order-total {
-            font-weight: bold;
-        }
-
-        .checkout-button {
-            display: block;
-            width: 100%;
-            padding: 8px 10px;
-            border: none;
-            background-color: #febd69;
-            color: #111;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .checkout-button:hover {
-            background-color: #fdba4e;
-        }
-    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="amazon-logo">
-        <a href="Customer_Home.php">
-            <img src="https://mlsvc01-prod.s3.amazonaws.com/fd4e81f3101/a77159a6-cbf4-46a1-a731-522b77da3e42.png?ver=1649349594000" alt="Amazon Logo">
-            </a>
-        </div>
-    </div>
-
-    <div class="checkout-container">
-        <h1>Checkout</h1>
-
-        <div class="order-summary">
-            <h2>Order Summary</h2>
-            <table>
-                <tr>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                </tr>
-                <?php foreach ($_SESSION['cart'] as $product): ?>
-                    <tr>
-                        <td><?php echo $product['product_name']; ?></td>
-                        <td><?php echo $product['product_price']; ?></td>
-                        <td><?php echo $product['quantity']; ?></td>
-                        <td><?php echo $product['product_price'] * $product['quantity']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                <tr>
-                    <td colspan="3" class="order-total">Total</td>
-                    <td><?php echo $totalPrice; ?></td>
-                </tr>
-            </table>
-        </div>
-
-        <form action="Payment.php" method="post">
-    <input type="submit" name="submit" class="checkout-button" value="Place Order">
-</form>
-
-
-    </div>
+    <h1>Checkout</h1>
+    <p>Total Price: <?php echo $totalPrice; ?></p>
+    <form action="payment-success.php" method="POST">
+        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_1GaCiVC0yUp5a2"
+                data-amount="<?php echo $totalPrice * 100; ?>"
+                data-currency="INR"
+                data-order_id="<?php echo $order->id; ?>"
+                data-buttontext="Pay with Razorpay"
+                data-name="Your Store"
+                data-description="Payment for your order"
+                data-image="https://your-store.com/logo.png"
+                data-prefill.name="John Doe"
+                data-prefill.email="john.doe@example.com"
+                data-theme.color="#F37254"
+        ></script>
+    </form>
 </body>
 </html>

@@ -1,6 +1,4 @@
-<?php
-    require './razorpay-php-master/Razorpay.php';
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +71,25 @@
 </head>
 <body>
     <div class="container">
-        <h1>Checkout</h1>
+    <form action="checkout-process.php" method="post">
+    <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key=" rzp_test_1GaCiVC0yUp5a2"
+        data-amount="<?php echo $totalPrice * 100; ?>"
+        data-currency="INR"
+        data-buttontext="Pay with Razorpay"
+        data-name="Your Store"
+        data-description="Payment for your order"
+        data-image="https://your-store.com/logo.png"
+        data-prefill.name="John Doe"
+        data-prefill.email="john.doe@example.com"
+        data-theme.color="#F37254"
+    >
+</script>
+</form>
+
+        <!-- <h1>Checkout</h1>
 
         <div class="payment-methods">
             <div class="payment-method" data-method="gpay" onclick="selectPaymentMethod(this)">
@@ -120,7 +136,7 @@
                         window.location.href = 'checkout-process.php';
                         break;
                     case 'razorpay':
-                        window.location.href = './razorpay-php-master/Razorpay.php';
+                        window.location.href = 'checkout-process.php';
                         break;
                     case 'UPI':
                         window.location.href = 'checkout-process.php';
@@ -133,6 +149,6 @@
                 alert('Please select a payment method.');
             }
         }
-    </script>
+    </script> -->
 </body>
 </html>

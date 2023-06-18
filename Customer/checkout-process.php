@@ -8,51 +8,24 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     exit();
 }
 
-// Calculate the total price
-$totalPrice = 0;
-foreach ($_SESSION['cart'] as $product) {
-    $totalPrice += $product['product_price'] * $product['quantity'];
-}
+// Get the total price from the form data
+$totalPrice = $_POST['total_price'];
 
-// Database connection settings
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db_name = "ecom";
+// Initialize the Razorpay API
+$api = new Api(' rzp_test_1GaCiVC0yUp5a2', 'Wd0bCMuVME0A1PnRW1r6ubMW');
 
-// Create a new database connection
-$conn = new mysqli($servername, $username, $password, $db_name);
+// Create an order
+$orderData = [
+    'receipt' => uniqid(),
+    'amount' => $totalPrice * 100, // Amount in paise (multiply by 100 for INR)
+    'currency' => 'INR',
+    'payment_capture' => 1 // Auto-capture payment
+];
 
-// Check the database connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$order = $api->order->create($orderData);
 
-// Prepare the SQL statement to insert the order details into the database
-$stmt = $conn->prepare("INSERT INTO orders (product_name, product_price, quantity, total_price) VALUES (?, ?, ?, ?)");
-
-// Bind the parameters to the SQL statement
-$stmt->bind_param("ssdd", $productName, $productPrice, $quantity, $totalPrice);
-
-// Insert each product from the cart into the database
-foreach ($_SESSION['cart'] as $product) {
-    $productName = $product['product_name'];
-    $productPrice = $product['product_price'];
-    $quantity = $product['quantity'];
-
-    // Execute the SQL statement
-    $stmt->execute();
-}
-
-// Close the prepared statement
-$stmt->close();
-
-// Close the database connection
-$conn->close();
-
-// Clear the cart after successful checkout
-$_SESSION['cart'] = array();
-
-// Redirect to a success page
-header("Location: checkout-success.php");
+// Redirect the user to the Razorpay payment page
+header('Location: ' . $order['url']);
 exit();
+
+?>

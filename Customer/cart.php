@@ -85,62 +85,77 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
 <head>
     <title>View Cart</title>
     <link rel="stylesheet" href="../CSS/View_Cart.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
     <div class="header">
         <div class="amazon-logo">
-        <a href="Customer_Home.php">
-            <img src="https://mlsvc01-prod.s3.amazonaws.com/fd4e81f3101/a77159a6-cbf4-46a1-a731-522b77da3e42.png?ver=1649349594000" alt="Amazon Logo">
+            <a href="Customer_Home.php">
+                <img src="https://mlsvc01-prod.s3.amazonaws.com/fd4e81f3101/a77159a6-cbf4-46a1-a731-522b77da3e42.png?ver=1649349591000" alt="Amazon Logo">
             </a>
         </div>
-        
     </div>
-
-    <h1>Cart</h1>
-
-    <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
-        <table class="cart-table">
-            <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Category</th>
-                <th>Subtotal</th>
-                <th>Action</th>
-            </tr>
-            <?php foreach ($_SESSION['cart'] as $product): ?>
-                <tr>
-                    <td><?php echo $product['product_name']; ?></td>
-                    <td><?php echo $product['product_price']; ?></td>
-                    <td>
-                    <form action="cart.php?action=update&product_id=<?php echo $product['product_id']; ?>" method="post">
-                            <input type="number" name="quantity" value="<?php echo $product['quantity']; ?>" min="1">
-                            <input type="submit" value="Update">
-                        </form>
-                    </td>
-                    <td><?php echo $products[$product['product_id']]; ?></td>
-                    <td><?php echo $product['product_price'] * $product['quantity']; ?></td>
-                    <td>
-                        <a href="cart.php?action=delete&product_id=<?php echo $product['product_id']; ?>">Delete</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            <tr>
-                <td colspan="4">Subtotal:</td>
-                <td><?php echo $subTotal; ?></td>
-                <td></td>
-            </tr>
-        </table><br>
-
-        <form action="checkout.php" method="post">
-            <input type="submit" class="buy-now-button" value="Buy Now">
-        </form><br>
-        <form action="Customer_Home.php" method="post">
-            <input type="submit" class="buy-now-button" value="Click here to add more items">
-        </form>
-    <?php else: ?>
-        <p>Your cart is empty.</p>
-    <?php endif; ?>
-    <a href="Customer_Home.php">Home</a>
+    <div class="cart-container">
+        <h1>Shopping Cart</h1>
+        <?php if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])): ?>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($_SESSION['cart'] as $product): ?>
+                        <tr>
+                            <td><?php echo $product['product_name']; ?></td>
+                            <td><?php echo $product['product_price']; ?></td>
+                            <td>
+                                <form action="cart.php?action=update&product_id=<?php echo $product['product_id']; ?>" method="post">
+                                    <input type="number" name="quantity" min="1" value="<?php echo $product['quantity']; ?>">
+                                    <input type="submit" value="Update">
+                                </form>
+                            </td>
+                            <td><?php echo $product['product_price'] * $product['quantity']; ?></td>
+                            <td>
+                                <a href="cart.php?action=delete&product_id=<?php echo $product['product_id']; ?>">
+                                    Remove
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td><strong>Subtotal: <?php echo $subTotal; ?></strong></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form action="checkout.php" method="post">
+                <input type="hidden" name="total_price" value="<?php echo $subTotal; ?>">
+                <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="rzp_test_1GaCiVC0yUp5a2"
+                    data-amount="<?php echo $subTotal * 100; ?>"
+                    data-currency="INR"
+                    data-buttontext="Pay with Razorpay"
+                    data-name="Your Store"
+                    data-description="Payment for your order"
+                    data-image="https://your-store.com/logo.png"
+                    data-prefill.name="John Doe"
+                    data-prefill.email="john.doe@example.com"
+                    data-theme.color="#F37254"
+                ></script>
+            </form>
+        <?php else: ?>
+            <p>Your cart is empty.</p>
+        <?php endif; ?>
+        <div class="continue-shopping">
+            <a href="Customer_Home.php">Continue Shopping</a>
+        </div>
+    </div>
 </body>
 </html>
