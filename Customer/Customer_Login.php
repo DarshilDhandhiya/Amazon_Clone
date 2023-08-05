@@ -13,7 +13,7 @@ session_start();
 <body>
   <div class="wrapper">
     <div class="modalForm">
-        <h2>Login</h2>
+        <h2>Login or SighUp</h2>
         <div class="actionBtns">
             <button class="actionBtn userBtn">Login</button>
             <button class="actionBtn SignupBtn">Sign up</button>

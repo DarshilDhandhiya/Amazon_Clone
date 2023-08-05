@@ -1,6 +1,17 @@
+/* View_Cart.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
 .header {
-    background: #131921;
-    padding: 10px 0;
+    background-color: #131921;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -10,27 +21,29 @@
     height: 40px;
 }
 
-.header-cart {
-    display: flex;
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
+.cart-container {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.cart-icon {
-    margin-right: 5px;
+.cart-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 .cart-table {
     width: 100%;
-    margin-top: 30px;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 .cart-table th,
 .cart-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
     text-align: left;
 }
 
@@ -38,27 +51,48 @@
     margin-top: 20px;
     text-align: right;
     font-weight: 600;
+    font-size: 18px;
 }
 
 .cart-subtotal span {
     color: #B12704;
-    font-size: 18px;
 }
 
 .buy-now-button {
     display: block;
     width: 100%;
-    padding: 8px 10px;
-    border: none;
-    background-color: #febd69;
-    color: #111;
-    font-size: 16px;
+    padding: 12px 24px;
+    background-color: #FF9900;
+    color: white;
+    font-size: 18px;
     font-weight: 500;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    margin-top: 20px;
+    transition: background-color 0.3s;
 }
 
 .buy-now-button:hover {
-    background-color: #fdba4e;
+    background-color: #FF8000;
+}
+
+.continue-shopping {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.continue-shopping a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FE9900;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.continue-shopping a:hover {
+    background-color: #FE8000;
 }

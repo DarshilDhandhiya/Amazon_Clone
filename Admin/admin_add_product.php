@@ -100,13 +100,14 @@
             </select><br><br>
 
             <label for="product_details">Product Details:</label>
-            <textarea name="product_details" id="product_details" rows="10" cols="50" required></textarea><br><br>
+            <textarea name="product_details" id="product_details" rows="10" cols="50" required></textarea>
+
 
             <!-- <label for="product_image">Product Image:</label>
             <input type="file" name="product_image[]" id="product_image" multiple required><br> -->
-
+<!-- 
             <label>Select Product Image:</label>
-            <input type="file" id="product_image" name="image" required><br><br>
+            <input type="file" id="product_image" name="image"><br><br> -->
 
             <input type="submit" name="submit" value="Add Product">
         </form>
@@ -136,58 +137,25 @@
     select.add(option);
   });
 </script>
-
-    <!-- <script>
-        var subMenuOptions = {
-            mobile: ["Apple", "OnePlus", "Pixel"],
-            watch: ["Fastrack", "Fossil", "Noise"],
-            speaker: ["Boat", "Bose", "JBL"],
-            tv: ["LG", "Panasonic", "Vu"],
-            camera: ["Canon", "Casio", "Nikon"]
-        };
-
-        var categorySelect = document.getElementById("product_category");
-        var companySelect = document.getElementById("product_company");
-
-        categorySelect.addEventListener("change", function() {
-            var selectedSubMenuOptions = subMenuOptions[this.value];
-            while (companySelect.firstChild) {
-                companySelect.removeChild(companySelect.firstChild);
-            }
-
-            if (selectedSubMenuOptions) {
-                for (var i = 0; i < selectedSubMenuOptions.length; i++) {
-                    var option = document.createElement("option");
-                    option.value = selectedSubMenuOptions[i];
-                    option.text = selectedSubMenuOptions[i];
-                    companySelect.appendChild(option);
-                }
-            }
-        });
-    </script> -->
-</body>
-</html>
-
-
-<b></b><br>
-<b></b><br>
-<b></b><br>
-<b></b><br>
-<b></b><br>
-
-<li></li><br><br>
-<li></li><br><br>
-<li></li><br><br>
-<li></li><br><br>
-<li></li><br><br>
-<li></li><br><br>
-<li></li><br><br>
-<li></li><br><br>
-
-
-
+<script>
+    window.addEventListener('load', function() {
+    var productDetailsTextArea = document.getElementById("product_details");
+    var preFilledContent = `
 <b>Brand: </b><br><br>
 <b>Model Name: </b><br><br>
-<b>Network Service Provider</b><br><br>
+<b>Network Service Provider: </b><br><br>
 <b>Operating System: </b><br><br>
 <b>Cellular Technology: </b><br>
+<li> </li><br><br>
+<li> </li><br><br>
+<li> </li><br><br>
+<li> </li><br><br>
+    `;
+    
+    productDetailsTextArea.innerHTML = preFilledContent;
+});
+
+</script>
+
+</body>
+</html>

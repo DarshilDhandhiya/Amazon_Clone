@@ -34,13 +34,13 @@
   <!-- Navbar -->
   <div class="navbar">
         <ul>
-            <li><a href="./Admin_Dashboard">Dashboard</a></li>
+            <li><a href="./Admin_Dashboard.php">Dashboard</a></li>
             <li><a href="./admin_add_product.php">Manage Products</a></li>
-            <li><a href="./Admin_Add_Products.php">Add Product</a></li>
-            <li><a href="./edit_product.php">Edit Product</a></li>
-            <li><a href="./delete_product.php">Delete Product</a></li>
-            <li><a href="admin-orders.php">View Orders</a></li>
-            <li><a href="admin-orders.php">Manage Orders</a></li>
+            <li><a href="./admin_add_product.php">Add Product</a></li>
+            <li><a href="#">Edit Product</a></li>
+            <li><a href="#">Delete Product</a></li>
+            <li><a href="./admin-orders.php">View Orders</a></li>
+            <li><a href="./admin-orders.php">Manage Orders</a></li>
             <li><a href="./A_Logout.php">Logout</a></li>
         </ul>
     </div>
@@ -53,8 +53,8 @@
         
         <h3>Manage Products</h3>
         <ul>
-            <li><a href="#">Manage Product</a></li>
-            <li><a href="#">Add Product</a></li>
+            <li><a href="./admin_add_product.php">Manage Product</a></li>
+            <li><a href="./admin_add_product.php">Add Product</a></li>
             <li><a href="#">Edit Product</a></li>
             <li><a href="#">Delete Product</a></li>
         </ul>

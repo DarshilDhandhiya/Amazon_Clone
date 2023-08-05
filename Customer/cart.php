@@ -133,7 +133,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                         <td></td>
                     </tr>
                 </tbody>
-            </table>
+            </table><br>
+            <center>
             <form action="checkout.php" method="post">
                 <input type="hidden" name="total_price" value="<?php echo $subTotal; ?>">
                 <script
@@ -150,6 +151,8 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                     data-theme.color="#F37254"
                 ></script>
             </form>
+            </center>
+            
         <?php else: ?>
             <p>Your cart is empty.</p>
         <?php endif; ?>

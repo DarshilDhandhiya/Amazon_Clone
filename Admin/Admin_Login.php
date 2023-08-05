@@ -12,8 +12,8 @@ session_start();
 </head>
 <body>
   <div class="wrapper">
-    <div class="modalForm">
-        <h2>Login</h2>
+    <div class="modalForm"><br>
+        <h2>Admin Login</h2><br>
         <div>
             <form action="./A_Login.php" method="POST">
                 <div class="inputGroup">
